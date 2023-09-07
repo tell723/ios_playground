@@ -1,0 +1,51 @@
+import UIKit
+
+class Customer {
+    let name: String
+    var card: CreditCard?
+    init(name: String) {
+        self.name = name
+    }
+    deinit { print("\(name) is being deinitialized") }
+}
+class CreditCard {
+    let number: UInt64
+    unowned let customer: Customer
+    init(number: UInt64, customer: Customer) {
+        self.number = number
+        self.customer = customer
+    }
+    deinit { print("Card #\(number) is being deinitialized") }
+}
+
+
+var john: Customer
+john = Customer(name: "John Appleseed")
+john.card = CreditCard(number: 1234_5678_9012_3456, customer: john)
+
+let c = john.card!
+
+john = Customer(name: "Jhonathan")
+
+print(c.customer.name)
+dump(c)
+
+
+
+
+class Hoge: NSObject {
+    override init() {
+        super.init()
+    }
+
+    @objc func hoge(_: Any) {
+        print("hoge")
+    }
+
+    func sel(_ selector: Selector) {
+        self.perform(selector)
+    }
+}
+
+let h = Hoge()
+h.sel(#selector(h.hoge(_:)))
