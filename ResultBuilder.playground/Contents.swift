@@ -32,3 +32,22 @@ var str: String {
 
 print(str) // -> Hogehogefugapoofoo
 
+
+extension StringsBuilder {
+    public static func buildOptional(_ component: String?) -> String {
+        component ?? ""
+    }
+}
+
+@StringsBuilder
+var str2: String {
+    let hoge = "Hoge"
+
+    hoge
+    "hoge"
+    "fuga"
+    // buildOptional を実装すれば制御文を使える
+    if Bool.random() {
+        "foo"
+    }
+}
